@@ -6,6 +6,7 @@ import {
   StyleSheet
 } from 'react-native';
 import { getDecks } from '../utils/helpers';
+import { orange } from '../utils/colors'
 
 export default class ListDecks extends Component {
   state = {
@@ -26,14 +27,15 @@ export default class ListDecks extends Component {
         Object.keys(decks).map((deck) => {
           const title = decks[deck]['title'];
           const deckSize = decks[deck]['questions'].length;
+          const deckData = decks[deck];
           return (
             <View style={styles.deck} key={title}>
               <Text> Deck Name: {title} </Text>
               <Text> Total Cards: {deckSize}  </Text>
               <Button
-                title='Take Quiz'
-                color='orange'
-                onPress={() => (this.props.navigation.navigate('DeckView'))}
+                title='View Deck'
+                color={orange}
+                onPress={() => (this.props.navigation.navigate('DeckView', { deckData } ))}
               />
             </View>
           );
@@ -49,15 +51,10 @@ export default class ListDecks extends Component {
     return (
       <View>
         <Text> Card Decks </Text>
-
-        <View>
-          {this.renderDecks()}
-        </View>
-
+        <View> {this.renderDecks()} </View>
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({

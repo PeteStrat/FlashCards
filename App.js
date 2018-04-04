@@ -12,6 +12,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import ListDecks from './components/ListDecks';
 import CreateDeck from './components/CreateDeck';
 import DeckView from './components/DeckView';
+import QuizView from './components/QuizView';
 
 import deckSamples from './utils/deckSamples';
 import { seedDb } from './utils/api';
@@ -63,7 +64,12 @@ const MainNavigator = StackNavigator({
   DeckView: {
     screen: DeckView,
     navigationOptions: defaultNavOptions
+  },
+  QuizView: {
+    screen: QuizView,
+    navigationOptions: defaultNavOptions
   }
+
 });
 
 export default class App extends React.Component {
