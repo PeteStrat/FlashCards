@@ -13,6 +13,7 @@ import ListDecks from './components/ListDecks';
 import CreateDeck from './components/CreateDeck';
 import DeckView from './components/DeckView';
 import QuizView from './components/QuizView';
+import CreateCard from './components/CreateCard';
 
 import deckSamples from './utils/deckSamples';
 import { seedDb } from './utils/api';
@@ -67,6 +68,10 @@ const MainNavigator = StackNavigator({
   },
   QuizView: {
     screen: QuizView,
+    navigationOptions: defaultNavOptions
+  },
+  CreateCard: {
+    screen: CreateCard,
     navigationOptions: defaultNavOptions
   }
 

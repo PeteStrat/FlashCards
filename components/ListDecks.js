@@ -9,9 +9,8 @@ import { getDecks } from '../utils/helpers';
 import { orange } from '../utils/colors'
 
 export default class ListDecks extends Component {
-  state = {
-    decks: {}
-  }
+  state = {};
+
   componentDidMount() {
     getDecks({}, (result) => {
       this.setState((state) => {

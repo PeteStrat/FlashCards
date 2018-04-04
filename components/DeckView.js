@@ -20,6 +20,12 @@ export default class DeckView extends Component {
           color={orange}
           onPress={() => (this.props.navigation.navigate('QuizView', { deckData }))}
         />
+
+        <Button
+          title='Add A Card'
+          color={orange}
+          onPress={() => (this.props.navigation.navigate('CreateCard', { deckData }))}
+        />
       </View>
     );
   }

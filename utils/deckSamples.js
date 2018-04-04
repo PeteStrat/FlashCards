@@ -1,5 +1,5 @@
 export default {
-  deck1: {
+  Capitals: {
     title: 'Capitals',
     questions: [
       {
@@ -12,8 +12,8 @@ export default {
       }
     ]
   },
-  deck2: {
-    title: 'Game of Thrones',
+  GOT: {
+    title: 'GOT',
     questions: [
       {
         question: 'Who is Ned Stark',
