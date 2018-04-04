@@ -3,26 +3,22 @@ import {
   Button,
   View,
   Text,
-  AsyncStorage,
   StyleSheet
 } from 'react-native';
+import { getDecks } from '../utils/helpers';
 
 export default class ListDecks extends Component {
   state = {
+    decks: {}
   }
   componentDidMount() {
-    AsyncStorage.getItem('decks').then((result) => {
-      if (!result) {
-        console.log('No Decks Found');
-        return;
-      }
-
-      const decks = JSON.parse(result);
+    getDecks({}, (result) => {
       this.setState((state) => {
-        return {decks};
-      });
+        return { decks: result }
+      })
     });
   }
+
   renderDecks = () => {
     const { decks } = this.state;
     if (decks) {

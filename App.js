@@ -48,18 +48,21 @@ const Tabs = TabNavigator({
   }
 });
 
+const defaultNavOptions = {
+  headerTintColor: white,
+  headerStyle: {
+    backgroundColor: orange
+  }
+}
+
 const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs,
+    navigationOptions: defaultNavOptions
   },
   DeckView: {
     screen: DeckView,
-    navigationOptions: {
-      headerTintColor: red,
-      headerStyle: {
-        backgroundColor: purple
-      }
-    }
+    navigationOptions: defaultNavOptions
   }
 });
 
@@ -73,18 +76,15 @@ export default class App extends React.Component {
         console.log('Async Storage Contains Dummy Decks');
       }
     });
-
     // AsyncStorage.clear();
   }
-
 
   render() {
     return (
       <View
-      style={ {flex: 1} }
+      style={{flex: 1}}
       >
         <CustomStatusBar backgroundColor={orange} barStyle='light-content' />
-        {/* <Tabs /> */}
         <MainNavigator />
 
       </View>
