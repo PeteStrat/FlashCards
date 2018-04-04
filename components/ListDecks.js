@@ -2,7 +2,8 @@ import React from 'react';
 import {
   View,
   Text,
-  AsyncStorage
+  AsyncStorage,
+  StyleSheet
 } from 'react-native';
 
 export default class ListDecks extends React.Component {
@@ -27,8 +28,12 @@ export default class ListDecks extends React.Component {
       return (
         Object.keys(decks).map((deck) => {
           const title = decks[deck]['title'];
+          const deckSize = decks[deck]['questions'].length;
           return (
-            <Text key={title}> {title} </Text>
+            <View style={styles.deck} key={title}>
+              <Text> Deck Name: {title} </Text>
+              <Text> Total Cards: {deckSize}  </Text>
+            </View>
           );
         })
       )
@@ -41,9 +46,28 @@ export default class ListDecks extends React.Component {
 
     return (
       <View>
-        <Text> List of Decks Component </Text>
-        {this.renderDecks()}
+        <Text> Card Decks </Text>
+
+        <View>
+          {this.renderDecks()}
+        </View>
+
       </View>
     );
   }
+
 }
+
+const styles = StyleSheet.create({
+  deckList: {
+
+  },
+  deck: {
+    color: 'black',
+    backgroundColor: 'grey',
+    borderWidth: 2,
+    borderRadius: 3,
+    borderColor: '#000',
+    padding: 10
+  }
+});
