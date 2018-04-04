@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
+  Button,
   View,
   Text,
   AsyncStorage,
   StyleSheet
 } from 'react-native';
 
-export default class ListDecks extends React.Component {
+export default class ListDecks extends Component {
   state = {
   }
   componentDidMount() {
@@ -33,6 +34,11 @@ export default class ListDecks extends React.Component {
             <View style={styles.deck} key={title}>
               <Text> Deck Name: {title} </Text>
               <Text> Total Cards: {deckSize}  </Text>
+              <Button
+                title='Take Quiz'
+                color='orange'
+                onPress={() => (this.props.navigation.navigate('DeckView'))}
+              />
             </View>
           );
         })
@@ -63,7 +69,6 @@ const styles = StyleSheet.create({
 
   },
   deck: {
-    color: 'black',
     backgroundColor: 'grey',
     borderWidth: 2,
     borderRadius: 3,

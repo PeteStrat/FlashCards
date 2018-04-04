@@ -6,15 +6,16 @@ import {
   StatusBar,
   AsyncStorage
 } from 'react-native';
-import { red, pink, orange } from './utils/colors';
 import { Constants } from 'expo';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import ListDecks from './components/ListDecks';
 import CreateDeck from './components/CreateDeck';
+import DeckView from './components/DeckView';
 
 import deckSamples from './utils/deckSamples';
 import { seedDb } from './utils/api';
+import { red, pink, orange, purple, white } from './utils/colors';
 
 function CustomStatusBar ({backgroundColor, ...props}) {
   return (
@@ -32,7 +33,6 @@ function Home () {
   )
 }
 
-
 const Tabs = TabNavigator({
   'All Decks': {
     screen: ListDecks,
@@ -46,7 +46,22 @@ const Tabs = TabNavigator({
       tabBarIcon: () => <FontAwesome name='plus-square' size={30} color='black'  />
     }
   }
-})
+});
+
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckView: {
+    screen: DeckView,
+    navigationOptions: {
+      headerTintColor: red,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  }
+});
 
 export default class App extends React.Component {
   componentDidMount () {
@@ -69,7 +84,8 @@ export default class App extends React.Component {
       style={ {flex: 1} }
       >
         <CustomStatusBar backgroundColor={orange} barStyle='light-content' />
-        <Tabs />
+        {/* <Tabs /> */}
+        <MainNavigator />
 
       </View>
     );
