@@ -4,7 +4,9 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  Animated,
+  TouchableOpacity
 } from 'react-native';
 import { getDecks } from '../utils/helpers';
 import { orange } from '../utils/colors'
@@ -29,13 +31,15 @@ export default class ListDecks extends Component {
           const deckSize = decks[deck]['questions'].length;
           return (
             <View style={styles.deck} key={title}>
-              <Text> Deck Name: {title} </Text>
-              <Text> Total Cards: {deckSize}  </Text>
-              <Button
-                title='View Deck'
-                color={orange}
-                onPress={() => (this.props.navigation.navigate('DeckView', { title } ))}
-              />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => (this.props.navigation.navigate('DeckView', { title } ))}
+            >
+              <View>
+                <Text> Deck Name: {title} </Text>
+                <Text> Total Cards: {deckSize}  </Text>
+              </View>
+            </TouchableOpacity>
             </View>
           );
         })

@@ -74,7 +74,8 @@ const MainNavigator = StackNavigator({
   CreateCard: {
     screen: CreateCard,
     navigationOptions: defaultNavOptions
-  }
+  },
+
 
 });
 
