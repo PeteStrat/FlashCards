@@ -18,6 +18,7 @@ import CreateCard from './components/CreateCard';
 import deckSamples from './utils/deckSamples';
 import { seedDb } from './utils/api';
 import { red, pink, orange, purple, white } from './utils/colors';
+import { setLocalNotification } from './utils/helpers';
 
 function CustomStatusBar ({backgroundColor, ...props}) {
   return (
@@ -73,21 +74,25 @@ const MainNavigator = StackNavigator({
   CreateCard: {
     screen: CreateCard,
     navigationOptions: defaultNavOptions
-  }
+  },
+
 
 });
 
 export default class App extends React.Component {
+  state = {
+    dataExists: false
+  }
   componentDidMount () {
+    setLocalNotification();
     // Fill Async Storage with dummy data for testing
     AsyncStorage.getAllKeys().then((keys) => {
       if (keys.length < 1) {
-        seedDb(deckSamples)
+        seedDb(deckSamples, () => { this.setState({dataExists: true})});
       } else {
         console.log('Async Storage Contains Dummy Decks');
       }
     });
-    // AsyncStorage.clear();
   }
 
   render() {

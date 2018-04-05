@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { addCard, getDeck } from '../utils/helpers';
-import { orange } from '../utils/colors';
+import { orange, white, black } from '../utils/colors';
 
 
 export default class CreateCard extends Component {
@@ -36,8 +36,7 @@ export default class CreateCard extends Component {
     const { question, answer, deckName } = this.state;
 
     return (
-      <View>
-        <Text> PLACEHOLDER </Text>
+      <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text> Add A Card To The Deck: {deckName} </Text>
 
           <TextInput
@@ -64,19 +63,23 @@ export default class CreateCard extends Component {
               }
             }
           />
-
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: white,
+    justifyContent: 'center'
+  },
   input: {
-    width: 200,
-    height: 44,
-    // padding: 8,
+    alignSelf: 'stretch',
+    paddingBottom: 8,
     borderWidth: 1,
     borderColor: 'black',
-    margin: 10
+    margin: 10,
+    height: 30
   }
 })

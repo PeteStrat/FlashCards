@@ -3,10 +3,13 @@ import {
   Button,
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  ScrollView,
+  Animated,
+  TouchableOpacity
 } from 'react-native';
 import { getDecks } from '../utils/helpers';
-import { orange } from '../utils/colors'
+import { orange, blue, white } from '../utils/colors'
 
 export default class ListDecks extends Component {
   state = {};
@@ -27,15 +30,16 @@ export default class ListDecks extends Component {
           const title = decks[deck]['title'];
           const deckSize = decks[deck]['questions'].length;
           return (
-            <View style={styles.deck} key={title}>
-              <Text> Deck Name: {title} </Text>
-              <Text> Total Cards: {deckSize}  </Text>
-              <Button
-                title='View Deck'
-                color={orange}
-                onPress={() => (this.props.navigation.navigate('DeckView', { title } ))}
-              />
-            </View>
+            <TouchableOpacity
+              style={styles.deck}
+              key={title}
+              onPress={() => (this.props.navigation.navigate('DeckView', { title } ))}
+            >
+              <View>
+                <Text> Deck Name: {title} </Text>
+                <Text> Total Cards: {deckSize}  </Text>
+              </View>
+            </TouchableOpacity>
           );
         })
       )
@@ -45,25 +49,37 @@ export default class ListDecks extends Component {
   }
 
   render () {
-
     return (
-      <View>
-        <Text> Card Decks </Text>
-        <View> {this.renderDecks()} </View>
+      <View style={styles.container}>
+        <Text style={styles.title}> Card Decks </Text>
+        <ScrollView> {this.renderDecks()} </ScrollView>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  deckList: {
-
+  container: {
+    flex: 1,
+    paddingTop: 22,
+    backgroundColor: 'black',
+  },
+  title: {
+    color: white,
+    backgroundColor: 'black',
+    textAlign: 'center',
+    paddingBottom: 5,
+    fontWeight: 'bold',
+    fontSize: 25
   },
   deck: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 30,
+    margin: 10,
+    borderBottomWidth: 1,
     backgroundColor: 'grey',
-    borderWidth: 2,
-    borderRadius: 3,
-    borderColor: '#000',
-    padding: 10
+    borderColor: '#000'
   }
 });
