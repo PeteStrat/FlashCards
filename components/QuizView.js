@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Stylesheet,
+  StyleSheet,
   View,
   Text,
   Button
@@ -10,7 +10,7 @@ import {
   clearLocalNotification,
   setLocalNotification
 } from '../utils/helpers';
-import { blue, red, lightPurp } from '../utils/colors';
+import { blue, red, lightPurp, white, black } from '../utils/colors';
 
 export default class QuizView extends Component {
   state = {
@@ -41,7 +41,7 @@ export default class QuizView extends Component {
     const { questions, questionIndex } = this.state;
     if ( questions && questions.length > 0) {
       return (
-        <Text> {questions[questionIndex].question} </Text>
+        <Text style={styles.deck}> {questions[questionIndex].question} </Text>
       );
     } else {
       return ( <Text> Question Rendering </Text>);
@@ -53,7 +53,7 @@ export default class QuizView extends Component {
 
     if (showAnswer) {
       return (
-        <Text> The Answer Is: {questions[questionIndex]['answer']} </Text>
+        <Text style={styles.answer}> The Answer Is: {questions[questionIndex]['answer']} </Text>
       )
     } else {
       return (<Text />)
@@ -97,8 +97,8 @@ export default class QuizView extends Component {
       clearLocalNotification()
         .then(setLocalNotification)
       return (
-        <View>
-          <Text> Done, Score {correctAnswers} out of {questions.length} </Text>
+        <View style={styles.container}>
+          <Text style={styles.deck}> Done, Score {correctAnswers} out of {questions.length} </Text>
 
           <Button
             title='Restart Quiz'
@@ -127,11 +127,10 @@ export default class QuizView extends Component {
     }
 
     return (
-      <View>
-        <Text> Currently on Deck: {deckName} </Text>
-        <Text> {correctAnswers} out of {questionIndex + 1} Questions Correct </Text>
-        <Text> {questions.length - questionIndex} Questions Remaining </Text>
-
+      <View style={styles.container}>
+        <Text style={styles.title}> Currently on Deck: {deckName} </Text>
+        <Text style={styles.title}> {correctAnswers} out of {questionIndex + 1} Questions Correct </Text>
+        <Text style={styles.title}> {questions.length - questionIndex} Questions Remaining </Text>
         {this.renderQuestion()}
 
         <Button
@@ -155,3 +154,34 @@ export default class QuizView extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 10,
+    paddingTop: 22,
+    backgroundColor: white,
+  },
+  title: {
+    textAlign: 'center',
+    paddingBottom: 5,
+    fontWeight: 'bold',
+    fontSize: 16
+  },
+  deck: {
+    textAlign: 'center',
+    padding: 30,
+    margin: 5,
+    borderBottomWidth: 1,
+    backgroundColor: 'grey',
+    borderColor: '#000'
+  },
+  answer: {
+    textAlign: 'center',
+    color: white,
+    padding: 30,
+    margin: 5,
+    borderBottomWidth: 1,
+    backgroundColor: black,
+    borderColor: '#000'
+  }
+});

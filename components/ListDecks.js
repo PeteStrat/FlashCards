@@ -68,7 +68,9 @@ const styles = StyleSheet.create({
     color: white,
     backgroundColor: 'black',
     textAlign: 'center',
-    paddingBottom: 5
+    paddingBottom: 5,
+    fontWeight: 'bold',
+    fontSize: 25
   },
   deck: {
     flex: 1,

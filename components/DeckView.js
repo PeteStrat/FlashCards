@@ -5,7 +5,7 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
-import { orange, blue } from '../utils/colors';
+import { orange, blue, white, black, red } from '../utils/colors';
 import { getDeck } from '../utils/helpers';
 
 export default class DeckView extends Component {
@@ -22,18 +22,18 @@ export default class DeckView extends Component {
   render () {
     const { title, questions } = this.state;
     return (
-      <View>
-        <Text> Deck Name: {title} </Text>
-        <Text> Total Cards: {questions.length}  </Text>
+      <View style={styles.container}>
+        <Text style={styles.stats}> Deck Name: {title} </Text>
+        <Text style={styles.stats}> Total Cards: {questions.length}  </Text>
         <Button
           title='Take Quiz'
-          color={orange}
+          color={red}
           onPress={() => (this.props.navigation.navigate('QuizView', { title }))}
         />
 
         <Button
           title='Add A Card'
-          color={orange}
+          color={red}
           onPress={() => (this.props.navigation.navigate('CreateCard', { title }))}
         />
 
@@ -48,5 +48,19 @@ export default class DeckView extends Component {
 }
 
 const styles = StyleSheet.create({
-
+  container: {
+    flex: 1,
+    paddingTop: 22,
+    backgroundColor: white,
+  },
+  button : {
+    backgroundColor: red,
+    color: red
+  },
+  stats: {
+    textAlign: 'center',
+    fontSize: 24,
+    paddingBottom: 20,
+    color: black
+  }
 });
