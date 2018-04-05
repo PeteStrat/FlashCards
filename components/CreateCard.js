@@ -37,7 +37,6 @@ export default class CreateCard extends Component {
 
     return (
       <View>
-        <Text> PLACEHOLDER </Text>
         <Text> Add A Card To The Deck: {deckName} </Text>
 
           <TextInput

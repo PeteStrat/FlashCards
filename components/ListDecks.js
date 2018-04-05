@@ -3,7 +3,8 @@ import {
   Button,
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from 'react-native';
 import { getDecks } from '../utils/helpers';
 import { orange } from '../utils/colors'
@@ -45,11 +46,10 @@ export default class ListDecks extends Component {
   }
 
   render () {
-
     return (
       <View>
         <Text> Card Decks </Text>
-        <View> {this.renderDecks()} </View>
+        <ScrollView> {this.renderDecks()} </ScrollView>
       </View>
     );
   }

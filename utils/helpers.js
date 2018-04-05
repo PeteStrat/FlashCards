@@ -4,7 +4,6 @@ const DECKS = 'decks';
 export function getDecks ({}, callback) {
   AsyncStorage.getItem(DECKS).then((result) => {
     if (!result) {
-      console.log('No Decks Found');
       return false;
     }
     const decks = JSON.parse(result);
@@ -27,5 +26,17 @@ export function getDeck (title, callback) {
   AsyncStorage.getItem(DECKS).then((result) => {
     const allDecks = JSON.parse(result);
     return callback(allDecks[title]);
+  });
+}
+
+export function saveDeckTitle (title, callback) {
+  AsyncStorage.getItem(DECKS).then((results) => {
+    let allDecks = JSON.parse(results);
+    allDecks[title] = {
+      title, questions: []
+    }
+    AsyncStorage.setItem(DECKS, JSON.stringify(allDecks)).then(() => {
+      return callback(title);
+    });
   });
 }
