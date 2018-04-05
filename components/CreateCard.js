@@ -7,14 +7,15 @@ import {
   TextInput,
   KeyboardAvoidingView
 } from 'react-native';
-import { addCard } from '../utils/helpers';
+import { addCard, getDeck } from '../utils/helpers';
 import { orange } from '../utils/colors';
 
 
 export default class CreateCard extends Component {
   state = {
     question: '',
-    answer: ''
+    answer: '',
+    deckName: ''
   }
 
   handleQuestionForm = (input) => {
@@ -24,15 +25,20 @@ export default class CreateCard extends Component {
   handleAnswerForm = (input) => {
     this.setState({answer: input});
   }
+
+  componentDidMount () {
+    const name = this.props.navigation.state.params.title;
+    this.setState((state) => {
+      return {...state, deckName: name}
+    })
+  }
   render () {
-    const { question, answer } = this.state;
-    const {deckData} = this.props.navigation.state.params;
-    const deckTitle = deckData['title'];
+    const { question, answer, deckName } = this.state;
 
     return (
       <View>
-        <Text> Add A Card To The Deck: {deckData['title']} </Text>
-
+        <Text> PLACEHOLDER </Text>
+        <Text> Add A Card To The Deck: {deckName} </Text>
 
           <TextInput
             style={styles.input}
@@ -51,13 +57,14 @@ export default class CreateCard extends Component {
             color={orange}
             onPress={
                 () => {
-                // Call AddCard Function & pass callback to render deck with new cards
-                addCard(deckData['title'], {question, answer}, (response) => {
-                  this.props.navigation.navigate('DeckView', { deckData: response })
+                // Call AddCard Function & pass callback to navigate to DeckView with new cards
+                addCard(deckName, {question, answer}, (response) => {
+                  this.props.navigation.navigate('DeckView', { title: deckName });
                 })
               }
             }
           />
+
       </View>
     )
   }
