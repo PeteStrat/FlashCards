@@ -5,7 +5,11 @@ import {
   Text,
   Button
 } from 'react-native';
-import { getDeck } from '../utils/helpers';
+import {
+  getDeck,
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/helpers';
 import { blue, red, lightPurp } from '../utils/colors';
 
 export default class QuizView extends Component {
@@ -90,6 +94,8 @@ export default class QuizView extends Component {
     const { questions, deckName , correctAnswers, questionIndex, showAnswer } = this.state;
 
     if (questionIndex == questions.length) {
+      clearLocalNotification()
+        .then(setLocalNotification)
       return (
         <View>
           <Text> Done, Score {correctAnswers} out of {questions.length} </Text>
@@ -109,6 +115,12 @@ export default class QuizView extends Component {
             title='Back To Deck View'
             color={blue}
             onPress={() => (this.props.navigation.navigate('DeckView', { title: deckName } ))}
+          />
+
+          <Button
+            title='View All Decks'
+            color={blue}
+            onPress={() => (this.props.navigation.navigate('All Decks'))}
           />
         </View>
       );
