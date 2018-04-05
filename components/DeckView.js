@@ -5,7 +5,7 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
-import { orange } from '../utils/colors';
+import { orange, blue } from '../utils/colors';
 import { getDeck } from '../utils/helpers';
 
 export default class DeckView extends Component {
@@ -36,6 +36,12 @@ export default class DeckView extends Component {
           color={orange}
           onPress={() => (this.props.navigation.navigate('CreateCard', { title }))}
         />
+
+          <Button
+            title='View All Decks'
+            color={blue}
+            onPress={() => (this.props.navigation.navigate('All Decks'))}
+          />
       </View>
     );
   }

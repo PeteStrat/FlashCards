@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { getDecks } from '../utils/helpers';
-import { orange } from '../utils/colors'
+import { orange, blue, white } from '../utils/colors'
 
 export default class ListDecks extends Component {
   state = {};
@@ -30,9 +30,9 @@ export default class ListDecks extends Component {
           const title = decks[deck]['title'];
           const deckSize = decks[deck]['questions'].length;
           return (
-            <View style={styles.deck} key={title}>
             <TouchableOpacity
-              style={styles.button}
+              style={styles.deck}
+              key={title}
               onPress={() => (this.props.navigation.navigate('DeckView', { title } ))}
             >
               <View>
@@ -40,7 +40,6 @@ export default class ListDecks extends Component {
                 <Text> Total Cards: {deckSize}  </Text>
               </View>
             </TouchableOpacity>
-            </View>
           );
         })
       )
@@ -51,8 +50,8 @@ export default class ListDecks extends Component {
 
   render () {
     return (
-      <View>
-        <Text> Card Decks </Text>
+      <View style={styles.container}>
+        <Text style={styles.title}> Card Decks </Text>
         <ScrollView> {this.renderDecks()} </ScrollView>
       </View>
     );
@@ -60,14 +59,25 @@ export default class ListDecks extends Component {
 }
 
 const styles = StyleSheet.create({
-  deckList: {
-
+  container: {
+    flex: 1,
+    paddingTop: 22,
+    backgroundColor: 'black',
+  },
+  title: {
+    color: white,
+    backgroundColor: 'black',
+    textAlign: 'center',
+    paddingBottom: 5
   },
   deck: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 30,
+    margin: 10,
+    borderBottomWidth: 1,
     backgroundColor: 'grey',
-    borderWidth: 2,
-    borderRadius: 3,
-    borderColor: '#000',
-    padding: 10
+    borderColor: '#000'
   }
 });
