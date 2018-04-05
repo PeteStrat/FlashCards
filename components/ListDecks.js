@@ -26,7 +26,6 @@ export default class ListDecks extends Component {
         Object.keys(decks).map((deck) => {
           const title = decks[deck]['title'];
           const deckSize = decks[deck]['questions'].length;
-          const deckData = decks[deck];
           return (
             <View style={styles.deck} key={title}>
               <Text> Deck Name: {title} </Text>
@@ -34,7 +33,7 @@ export default class ListDecks extends Component {
               <Button
                 title='View Deck'
                 color={orange}
-                onPress={() => (this.props.navigation.navigate('DeckView', { deckData } ))}
+                onPress={() => (this.props.navigation.navigate('DeckView', { title } ))}
               />
             </View>
           );

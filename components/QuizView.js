@@ -8,7 +8,7 @@ import {
 
 export default class QuizView extends Component {
   componentDidMount () {
-    addCard('Capitals', {card: 'test'});
+    // addCard('Capitals', {card: 'test'});
   }
   render () {
     const { deckData } = this.props.navigation.state.params;

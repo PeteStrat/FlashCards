@@ -14,9 +14,18 @@ export function getDecks ({}, callback) {
 
 export function addCard(deckTitle, card, callback) {
   AsyncStorage.getItem(DECKS).then((result) => {
+    let allDecks = JSON.parse(result);
+    allDecks[deckTitle]['questions'].push(card);
+
+    AsyncStorage.setItem(DECKS, JSON.stringify(allDecks)).then(() => {
+      return callback(allDecks[deckTitle]);
+    })
+  });
+}
+
+export function getDeck (title, callback) {
+  AsyncStorage.getItem(DECKS).then((result) => {
     const allDecks = JSON.parse(result);
-    console.log(allDecks)
-    console.log(allDecks[deckTitle]);
-    // result[deckTitle]
+    return callback(allDecks[title]);
   });
 }
